@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class addWordPanel extends JPanel {
+    private JTextField espanWord;
     private String [] languageList = new String []{"Eng", "Рус"};
     public addWordPanel(){
         setLayout(new GridBagLayout());
@@ -35,7 +36,7 @@ public class addWordPanel extends JPanel {
         add(espanLabel, constr);
 
         constr.gridx = 1;
-        JTextField espanWord = new JTextField(20);
+        this.espanWord = new JTextField(20);
         add(espanWord, constr);
 
         constr.gridx = 1;
@@ -155,8 +156,8 @@ public class addWordPanel extends JPanel {
                 translateWord.setText("");
             }
         });
-
-
-
+    }
+    public JTextField getTextField (){
+        return this.espanWord;
     }
 }

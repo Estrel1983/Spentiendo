@@ -63,6 +63,7 @@ public class mFrame extends JFrame {
             }
         });
 
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         JPanel headingPanel = new JPanel();
@@ -149,11 +150,17 @@ public class mFrame extends JFrame {
         mainPanel.add(headingPanel);
         mainPanel.add(panel);
 
+
         addWordPanel adPanel = new addWordPanel();
-        mainPanel.add(adPanel);
+        mainPanel.add(adPanel, LEFT_ALIGNMENT);
+
+
+        keyboardPanel espChars = new keyboardPanel(answerInput, adPanel.getTextField());
+
+
 
         add(mainPanel);
-
+        add(espChars, BorderLayout.EAST);
 
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -185,10 +192,10 @@ public class mFrame extends JFrame {
             public void windowDeactivated(WindowEvent e) {}
         });
 
-        setSize(500, 500);
+ //       setSize(1000, 1000);
         pack();
         setLocationRelativeTo(null);
-//        setLayout(null);
+
         setVisible(true);
     }
     private JDialog createAnswerDialog (AnswerCorrectness answer){
