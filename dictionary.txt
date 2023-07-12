@@ -1,5 +1,6 @@
 caballo/конь/0
-coche/машина/0
 pala/лопата/1
+coche/машина/0
+arlughalkjnalkjnvkjanvkjnvkjzfdnvkjznv/лдоавтплотмдлофтмлоятмлоятмоятслмосяч/0
 cosa/вещь/0
-casa/дом/0
+casa/дом/1

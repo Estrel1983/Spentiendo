@@ -79,6 +79,7 @@ public class DataOperation {
             WordFamiliarList.add(curWord);
             setCurWord();
         }
+        else setCurWord();
     }
     public static void saveAll(){
         if (!curWord.isRemembered())

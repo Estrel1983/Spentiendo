@@ -28,7 +28,7 @@ public class mFrame extends JFrame {
             public void actionPerformed(ActionEvent ev)
             {
                 removeTr();
-                timer.restart();
+                timer.stop();
             }
         });
         //обработчик мыши
@@ -94,16 +94,18 @@ public class mFrame extends JFrame {
         answerInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = createAnswerDialog(DataOperation.isCorrectTranslation(answerInput.getText()));
+                JDialog dialog = createAnswerDialog(DataOperation.isCorrectTranslation(answerInput.getText().toLowerCase()));
                 dialog.setLocationRelativeTo(answerInput);
                 dialog.setVisible(true);
                 wordQuery.setText(DataOperation.getCurTransl());
                 answerInput.setText("");
                 addT();
-                timer = new Timer (15*6*1000, event ->{
+                timer = new Timer (15*60 *1000, event ->{
                 removeTr();
                 answerInput.requestFocus();
+                timer.stop();
             });
+                timer.start();
             }
         });
 
@@ -112,18 +114,19 @@ public class mFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JDialog dialog = createAnswerDialog(DataOperation.isCorrectTranslation(answerInput.getText()));
+                JDialog dialog = createAnswerDialog(DataOperation.isCorrectTranslation(answerInput.getText().toLowerCase()));
                 dialog.setLocationRelativeTo(answerInput);
                 dialog.setVisible(true);
                 wordQuery.setText(DataOperation.getCurTransl());
                 answerInput.setText("");
  //               setVisible(false);
                 addT();
-                timer = new Timer (15*6*1000, event ->{
+                timer = new Timer (15*60*1000, event ->{
                     removeTr();
                     answerInput.requestFocus();
+                    timer.stop();
                 });
-
+                timer.start();
             }
         });
         panel.add(submitButton, constr);
@@ -152,7 +155,7 @@ public class mFrame extends JFrame {
         add(mainPanel);
 
 
-        pack();
+
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         addWindowListener(new WindowListener() {
@@ -183,6 +186,7 @@ public class mFrame extends JFrame {
         });
 
         setSize(500, 500);
+        pack();
         setLocationRelativeTo(null);
 //        setLayout(null);
         setVisible(true);
@@ -225,7 +229,7 @@ public class mFrame extends JFrame {
         dialog.add(panel);
         dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dialog.setSize(200, 120);
-       // dialog.pack();
+        dialog.pack();
         return dialog;
     }
     private void removeTr(){

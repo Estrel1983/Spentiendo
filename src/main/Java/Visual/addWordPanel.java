@@ -1,14 +1,15 @@
 package Visual;
 
+import Realisation.APIOperations;
 import Realisation.DataOperation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 public class addWordPanel extends JPanel {
+    private String [] languageList = new String []{"Eng", "Рус"};
     public addWordPanel(){
         setLayout(new GridBagLayout());
         setDoubleBuffered(true);
@@ -37,8 +38,22 @@ public class addWordPanel extends JPanel {
         JTextField espanWord = new JTextField(20);
         add(espanWord, constr);
 
-        constr.gridx = 0;
+        constr.gridx = 1;
         constr.gridy = 2;
+        JButton getTranslation = new JButton("Get Translation");
+
+        add (getTranslation, constr);
+
+        constr.gridx = 1;
+        constr.anchor = GridBagConstraints.EAST;
+        JComboBox lengBox = new JComboBox<>(languageList);
+
+        add (lengBox, constr);
+
+
+        constr.gridx = 0;
+        constr.gridy = 3;
+        constr.anchor = GridBagConstraints.WEST;
         JLabel translateLabel = new JLabel("Translation: ");
         add(translateLabel, constr);
 
@@ -47,8 +62,8 @@ public class addWordPanel extends JPanel {
         add(translateWord, constr);
 
         constr.gridx = 1;
-        constr.gridy = 3;
-        constr.anchor = GridBagConstraints.CENTER;
+        constr.gridy = 4;
+
         JButton addWord = new JButton("Add Word");
         addWord.addActionListener(new ActionListener() {
             @Override
@@ -115,6 +130,32 @@ public class addWordPanel extends JPanel {
 
 
         add (addWord, constr);
+
+        constr.gridx = 1;
+        constr.gridy = 4;
+        constr.anchor = GridBagConstraints.EAST;
+        JButton clearFields = new JButton("Clear");
+        add (clearFields, constr);
+
+        getTranslation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (espanWord.getText().isEmpty()){
+                    espanWord.requestFocus();
+                    return;
+                }
+                APIOperations myAPI = new APIOperations();
+                translateWord.setText(myAPI.getTranslation (espanWord.getText().toLowerCase(), (String)lengBox.getSelectedItem()));
+            }
+        });
+        clearFields.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                espanWord.setText("");
+                translateWord.setText("");
+            }
+        });
+
 
 
     }
